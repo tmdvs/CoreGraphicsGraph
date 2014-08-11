@@ -12,6 +12,9 @@ import QuartzCore
 class GraphView: UIView {
 
     private var data = NSMutableArray()
+    
+    private let padding : CGFloat = 30.0
+    
     var showLines = true
     
     required init(coder: NSCoder) {
@@ -34,6 +37,10 @@ class GraphView: UIView {
         super.drawRect(rect)
         
         let context = UIGraphicsGetCurrentContext()
+        let graphWidth = (rect.size.width - padding) - 10
+        let graphHeight = rect.size.height - 40
+        let axisWidth = rect.size.width - 10
+        let axisHeight = (rect.size.height - padding) - 10
         
         // Lets work out the highest value, this will be 
         // used to work out the position of each value
@@ -41,7 +48,7 @@ class GraphView: UIView {
         // of Y
         var everest : CGFloat = 0.0
         for point in data {
-            let n : Int = point.integerValue
+            let n : Int = point.objectForKey("value").integerValue
             if CGFloat(n) > everest {
                 everest = CGFloat(Int(ceilf(Float(n) / 25) * 25))
             }
@@ -51,7 +58,7 @@ class GraphView: UIView {
         var yLabelInterval : Int = Int(everest / 5)
         for i in 0...5 {
             
-            let label = UILabel(frame: CGRectMake(0, floor(rect.size.height - (CGFloat(i) * rect.size.height / 5) - 10), 20, 20))
+            let label = UILabel(frame: CGRectMake(0, floor((rect.size.height - padding) - CGFloat(i) * (axisHeight / 5) - 10), 20, 20))
             label.text = NSString(format: "%d", i * yLabelInterval)
             label.font = UIFont.systemFontOfSize(12)
             label.textAlignment = NSTextAlignment.Right
@@ -59,22 +66,19 @@ class GraphView: UIView {
             
             if(self.showLines && i != 0) {
                 let line = CGPathCreateMutable()
-                CGPathMoveToPoint(line, nil, 30, floor(rect.size.height - (CGFloat(i) * rect.size.height / 5)) + 1)
-                CGPathAddLineToPoint(line, nil, rect.size.width, floor(rect.size.height - (CGFloat(i) * rect.size.height / 5)) + 1)
+                CGPathMoveToPoint(line, nil, padding, floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5)) - 1)
+                CGPathAddLineToPoint(line, nil, axisWidth, floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5)) - 1)
                 CGContextAddPath(context, line)
                 CGContextSetStrokeColorWithColor(context, UIColor(white: 0.9, alpha: 1).CGColor)
                 CGContextStrokePath(context)
             }
-            
         }
-        
-        let graphWidth = rect.size.width - 30.0
         
         // Draw graph AXIS
         let axisPath = CGPathCreateMutable()
-        CGPathMoveToPoint(axisPath, nil, 30, 0)
-        CGPathAddLineToPoint(axisPath, nil, 30, rect.size.height - 1)
-        CGPathAddLineToPoint(axisPath, nil, rect.size.width, rect.size.height - 1)
+        CGPathMoveToPoint(axisPath, nil, padding, 10)
+        CGPathAddLineToPoint(axisPath, nil, padding, rect.size.height - 31)
+        CGPathAddLineToPoint(axisPath, nil, axisWidth, rect.size.height - 31)
         CGContextAddPath(context, axisPath)
         
         CGContextSetStrokeColorWithColor(context, UIColor.grayColor().CGColor)
@@ -82,15 +86,20 @@ class GraphView: UIView {
         
         // Lets move to the first point
         let pointPath = CGPathCreateMutable()
-        let positionPercentage : CGFloat = CGFloat(Int(data[0] as Int)) / everest;
-        let position : CGFloat = rect.size.height * CGFloat(positionPercentage);
+        let position : CGFloat = ceil((CGFloat(Int(data[0].objectForKey("value") as Int)) * (axisHeight / everest))) - 10
         
-        CGPathMoveToPoint(pointPath, nil, 40, rect.size.height - position)
+        CGPathMoveToPoint(pointPath, nil, 40, (axisHeight - position))
         
         // Draw a market at this first point
         let pointMarker = valueMarker()
-        pointMarker.frame = CGRectMake(32, (rect.size.height - position) - 8, 16, 16)
+        pointMarker.frame = CGRectMake(32, (graphHeight - position) - 8, 16, 16)
         self.layer.addSublayer(pointMarker)
+
+        let label = UILabel(frame: CGRectMake(23, rect.size.height - 20, 36, 20))
+        label.text = data[0].objectForKey("label") as NSString
+        label.font = UIFont.systemFontOfSize(12)
+        label.textAlignment = NSTextAlignment.Center
+        self.addSubview(label)
         
         // Remove first value from data set as its position zero
         data.removeObjectAtIndex(0)
@@ -102,16 +111,21 @@ class GraphView: UIView {
         for point in data {
             
             // Calculate X and Y positions
-            let ypositionPercentage : CGFloat = CGFloat(point.integerValue as Int) / everest;
-            let yposition : CGFloat = rect.size.height * ypositionPercentage;
-            let xposition : CGFloat = CGFloat(interval * (data.indexOfObject(point) + 1)) + 30.0
+            let yposition : CGFloat = ceil((CGFloat(point.objectForKey("value").integerValue as Int) * (axisHeight / everest))) - 10
+            let xposition : CGFloat = CGFloat(interval * (data.indexOfObject(point) + 1)) + padding
             
             // Draw line to this value
-            CGPathAddLineToPoint(pointPath, nil, xposition, rect.size.height - yposition);
+            CGPathAddLineToPoint(pointPath, nil, xposition, graphHeight - yposition);
+
+            let label = UILabel(frame: CGRectMake(xposition - 17, rect.size.height - 20, 36, 20))
+            label.text = point.objectForKey("label") as NSString
+            label.font = UIFont.systemFontOfSize(12)
+            label.textAlignment = NSTextAlignment.Center
+            self.addSubview(label)
             
             // Add a marker for this value
             let pointMarker = valueMarker()
-            pointMarker.frame = CGRectMake(xposition - 8, (rect.size.height - yposition) - 8, 16, 16)
+            pointMarker.frame = CGRectMake(xposition - 8, ceil(graphHeight - yposition) - 8, 16, 16)
             self.layer.addSublayer(pointMarker)
             
         }

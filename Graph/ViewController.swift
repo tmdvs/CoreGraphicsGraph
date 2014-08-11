@@ -14,17 +14,16 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        let myData = [NSNumber(int:10),
-                    NSNumber(int:56),
-                    NSNumber(int:34),
-                    NSNumber(int:44),
-                    NSNumber(int:12),
-                    NSNumber(int:60),
-                    NSNumber(int:54),
-                    NSNumber(int:23),
-                    NSNumber(int:53)] as NSArray
+        let myData = [  ["label" : "Mon",   "value" : NSNumber(int:15)] as NSDictionary,
+                        ["label" : "Tues",  "value" : NSNumber(int:30)] as NSDictionary,
+                        ["label" : "Weds",  "value" : NSNumber(int:7)] as NSDictionary,
+                        ["label" : "Thurs", "value" : NSNumber(int:60)] as NSDictionary,
+                        ["label" : "Fri",   "value" : NSNumber(int:30)] as NSDictionary,
+                        ["label" : "Sat",   "value" : NSNumber(int:15)] as NSDictionary,
+                        ["label" : "Sun",   "value" : NSNumber(int:45)] as NSDictionary,
+            ] as NSArray
         
-        let graph = GraphView(frame: CGRectMake(50, 50, 400, 200), data: myData)
+        let graph = GraphView(frame: CGRectMake(50, 50, 420, 200), data: myData)
         self.view.addSubview(graph)
         
     }
