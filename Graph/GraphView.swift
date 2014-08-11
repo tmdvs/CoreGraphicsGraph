@@ -11,7 +11,7 @@ import QuartzCore
 
 class GraphView: UIView {
 
-    var data : NSMutableArray = [] as NSMutableArray
+    private var data : NSMutableArray = [] as NSMutableArray
     
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -19,8 +19,13 @@ class GraphView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+    }
+    
+    init(frame: CGRect, data: NSArray) {
+        super.init(frame: frame)
         
         self.backgroundColor = UIColor.whiteColor()
+        self.data = data.mutableCopy() as NSMutableArray
         
     }
     
