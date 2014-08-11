@@ -4,11 +4,22 @@ CoreGraphicsGraph
 Draw a line graph with CGPath
 
 ```swift
-let graph = GraphView(frame: CGRectMake(50, 50, 400, 200))
-graph.data = [10, 56, 34, 44, 12, 60, 54, 23, 53] as NSMutableArray
+let myData = [
+    ["label" : "Mon",   "value" : NSNumber(int:15)] as NSDictionary,
+    ["label" : "Tues",  "value" : NSNumber(int:30)] as NSDictionary,
+    ["label" : "Weds",  "value" : NSNumber(int:7)] as NSDictionary,
+    ["label" : "Thurs", "value" : NSNumber(int:60)] as NSDictionary,
+    ["label" : "Fri",   "value" : NSNumber(int:30)] as NSDictionary,
+    ["label" : "Sat",   "value" : NSNumber(int:15)] as NSDictionary,
+    ["label" : "Sun",   "value" : NSNumber(int:45)] as NSDictionary,
+] as NSArray
+
+let graph = GraphView(frame: CGRectMake(50, 50, 420, 200), data: myData)
 self.view.addSubview(graph)
 ```
 
+![Example](http://up.tmdvs.me/image/462X0B3z2a2C/d)
+
 ## To do
-  1. Add x axis label support
-  2. Build y axis labels from values
+  1. ~~Add x axis label support~~
+  2. ~~Build y axis labels from values~~
