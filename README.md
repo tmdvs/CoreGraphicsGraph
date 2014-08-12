@@ -4,6 +4,8 @@ CoreGraphicsGraph
 Draw a line graph with CGPath and Swift. This is really just the result of playing with Swift, and so I can't garuntee the code is production ready, or even very good.
 
 ```swift
+// GraphView.swift example usage
+
 let myData = [
     ["label" : "Mon",   "value" : NSNumber(int:15)] as NSDictionary,
     ["label" : "Tues",  "value" : NSNumber(int:30)] as NSDictionary,
