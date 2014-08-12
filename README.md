@@ -24,6 +24,7 @@ self.view.addSubview(graph)
 There isn't really that many…
 
   - **showLines**   - whether or not to display lines from Y axis values
+  - **showPoints**  - whether or not to display points on the line graph
   - **linesColor**  - The colour of Y axis lines if visible
   - **axisColor**   - The colour of the X and Y axis
   - **graphColor**  - The colour of the actual line graph and points

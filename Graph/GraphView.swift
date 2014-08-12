@@ -23,6 +23,7 @@ class GraphView: UIView {
     
     // Graph Styles
     var showLines   = true
+    var showPoints  = true
     var linesColor  = UIColor(white: 0.9, alpha: 1)
     var axisColor   = UIColor.grayColor()
     var graphColor  = UIColor.blackColor()
@@ -138,10 +139,12 @@ class GraphView: UIView {
         xLabel.textAlignment = NSTextAlignment.Center
         addSubview(xLabel)
         
-        // Add a marker for this value
-        let pointMarker = valueMarker()
-        pointMarker.frame = CGRectMake(xposition - 8, ceil(graphHeight - yposition) - 8, 16, 16)
-        layer.addSublayer(pointMarker)
+        if(showPoints) {
+            // Add a marker for this value
+            let pointMarker = valueMarker()
+            pointMarker.frame = CGRectMake(xposition - 8, ceil(graphHeight - yposition) - 8, 16, 16)
+            layer.addSublayer(pointMarker)
+        }
     }
     
     
