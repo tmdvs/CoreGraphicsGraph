@@ -1,7 +1,7 @@
 CoreGraphicsGraph
 =================
 ![Example](http://up.tmdvs.me/image/3M3y0A3w2C1F/d)
-Draw a line graph with CGPath
+Draw a line graph with CGPath and Swift. This is really just the result of playing with Swift, and so I can't garuntee the code is production ready, or even very good.
 
 ```swift
 let myData = [
