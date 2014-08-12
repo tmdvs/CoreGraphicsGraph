@@ -161,11 +161,17 @@ class GraphView: UIView {
     // Returns a point for plotting
     func valueMarker() -> CALayer {
         let pointMarker = CALayer()
-        pointMarker.backgroundColor = graphColor.CGColor
+        pointMarker.backgroundColor = backgroundColor?.CGColor
         pointMarker.cornerRadius = 8
-        pointMarker.borderColor = backgroundColor?.CGColor
-        pointMarker.borderWidth = 3
         pointMarker.masksToBounds = true
+        
+        let markerInner = CALayer()
+        markerInner.frame = CGRectMake(3, 3, 10, 10)
+        markerInner.cornerRadius = 5
+        markerInner.masksToBounds = true
+        markerInner.backgroundColor = graphColor.CGColor
+        
+        pointMarker.addSublayer(markerInner)
         
         return pointMarker
     }
