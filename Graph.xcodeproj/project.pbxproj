@@ -12,7 +12,6 @@
 		223058BF1998E6AB001094C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223058BE1998E6AB001094C4 /* Images.xcassets */; };
 		223058CB1998E6AB001094C4 /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223058CA1998E6AB001094C4 /* GraphTests.swift */; };
 		223058D51998E6E0001094C4 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223058D41998E6E0001094C4 /* GraphView.swift */; };
-		22BAA37A19995FBE00DCEE50 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 22BAA37919995FBE00DCEE50 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,7 +211,6 @@
 			files = (
 				223058BA1998E6AA001094C4 /* ViewController.swift in Sources */,
 				223058B81998E6AA001094C4 /* AppDelegate.swift in Sources */,
-				22BAA37A19995FBE00DCEE50 /* README.md in Sources */,
 				223058D51998E6E0001094C4 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
