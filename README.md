@@ -18,7 +18,7 @@ let graph = GraphView(frame: CGRectMake(50, 50, 420, 200), data: myData)
 self.view.addSubview(graph)
 ```
 
-![Example](http://up.tmdvs.me/image/120l3k0N2D2q/d)
+![Example](http://up.tmdvs.me/image/3M3y0A3w2C1F/d)
 
 ## To do
   1. ~~Add x axis label support~~
