@@ -61,6 +61,7 @@ class GraphView: UIView {
             let label = UILabel(frame: CGRectMake(0, floor((rect.size.height - padding) - CGFloat(i) * (axisHeight / 5) - 10), 20, 20))
             label.text = NSString(format: "%d", i * yLabelInterval)
             label.font = UIFont.systemFontOfSize(12)
+            label.backgroundColor = UIColor.whiteColor()
             label.textAlignment = NSTextAlignment.Right
             self.addSubview(label)
             
@@ -99,6 +100,7 @@ class GraphView: UIView {
         label.text = data[0].objectForKey("label") as NSString
         label.font = UIFont.systemFontOfSize(12)
         label.textAlignment = NSTextAlignment.Center
+        label.backgroundColor = UIColor.whiteColor()
         self.addSubview(label)
         
         // Remove first value from data set as its position zero
@@ -121,6 +123,7 @@ class GraphView: UIView {
             label.text = point.objectForKey("label") as NSString
             label.font = UIFont.systemFontOfSize(12)
             label.textAlignment = NSTextAlignment.Center
+            label.backgroundColor = UIColor.whiteColor()
             self.addSubview(label)
             
             // Add a marker for this value
