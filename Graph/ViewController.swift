@@ -15,13 +15,13 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
         
         let myData = [
-            ["label" : "Mon",   "value" : NSNumber(int:15)] as NSDictionary,
-            ["label" : "Tues",  "value" : NSNumber(int:30)] as NSDictionary,
-            ["label" : "Weds",  "value" : NSNumber(int:7)] as NSDictionary,
-            ["label" : "Thurs", "value" : NSNumber(int:60)] as NSDictionary,
-            ["label" : "Fri",   "value" : NSNumber(int:30)] as NSDictionary,
-            ["label" : "Sat",   "value" : NSNumber(int:15)] as NSDictionary,
-            ["label" : "Sun",   "value" : NSNumber(int:45)] as NSDictionary,
+            ["label" : "Mon",   "value" : NSNumber(int:15)],
+            ["label" : "Tues",  "value" : NSNumber(int:30)],
+            ["label" : "Weds",  "value" : NSNumber(int:7)],
+            ["label" : "Thurs", "value" : NSNumber(int:60)],
+            ["label" : "Fri",   "value" : NSNumber(int:30)],
+            ["label" : "Sat",   "value" : NSNumber(int:15)],
+            ["label" : "Sun",   "value" : NSNumber(int:45)],
         ] as NSArray
         
         let graph = GraphView(frame: CGRectMake(50, 50, 420, 200), data: myData)
