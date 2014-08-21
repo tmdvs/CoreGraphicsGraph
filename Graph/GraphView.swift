@@ -100,7 +100,7 @@ class GraphView: UIView {
         // Lets move to the first point
         let pointPath = CGPathCreateMutable()
         let initialY : CGFloat = ceil((CGFloat(data[0].objectForKey("value").integerValue as Int) * (axisHeight / everest))) - 10
-        let initialX : CGFloat = padding + 10
+        let initialX : CGFloat = padding + (showPoints ? 10 : 0)
         CGPathMoveToPoint(pointPath, nil, initialX, graphHeight - initialY)
         
         // Loop over the remaining values
@@ -127,7 +127,7 @@ class GraphView: UIView {
         var xposition : CGFloat = CGFloat(interval * (data.indexOfObject(point))) + padding
         
         // If its the first point we want to nuge it in slightly
-        if(data.indexOfObject(point) == 0) {
+        if(data.indexOfObject(point) == 0 && showPoints) {
             xposition += 10
         }
         
