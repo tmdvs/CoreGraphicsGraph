@@ -12,7 +12,6 @@
 		223058BF1998E6AB001094C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223058BE1998E6AB001094C4 /* Images.xcassets */; };
 		223058CB1998E6AB001094C4 /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223058CA1998E6AB001094C4 /* GraphTests.swift */; };
 		223058D51998E6E0001094C4 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223058D41998E6E0001094C4 /* GraphView.swift */; };
-		2280B922199AA20500FD3D20 /* README.md in Sources */ = {isa = PBXBuildFile; fileRef = 2280B921199AA20500FD3D20 /* README.md */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -212,7 +211,6 @@
 			files = (
 				223058BA1998E6AA001094C4 /* ViewController.swift in Sources */,
 				223058B81998E6AA001094C4 /* AppDelegate.swift in Sources */,
-				2280B922199AA20500FD3D20 /* README.md in Sources */,
 				223058D51998E6E0001094C4 /* GraphView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,6 +319,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Graph/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -332,6 +331,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				INFOPLIST_FILE = Graph/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

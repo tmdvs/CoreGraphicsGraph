@@ -63,7 +63,7 @@ class GraphView: UIView {
         // on the Y axis, it essentialy reperesents 100%
         // of Y
         for point in data {
-            let n : Int = point.objectForKey("value").integerValue
+            let n : Int = (point.objectForKey("value") as NSNumber).integerValue
             if CGFloat(n) > everest {
                 everest = CGFloat(Int(ceilf(Float(n) / 25) * 25))
             }
@@ -99,7 +99,8 @@ class GraphView: UIView {
         
         // Lets move to the first point
         let pointPath = CGPathCreateMutable()
-        let initialY : CGFloat = ceil((CGFloat(data[0].objectForKey("value").integerValue as Int) * (axisHeight / everest))) - 10
+        let firstPoint = (data[0] as NSDictionary).objectForKey("value") as NSNumber
+        let initialY : CGFloat = ceil((CGFloat(firstPoint.integerValue as Int) * (axisHeight / everest))) - 10
         let initialX : CGFloat = padding + (showPoints ? 10 : 0)
         CGPathMoveToPoint(pointPath, nil, initialX, graphHeight - initialY)
         
@@ -122,8 +123,10 @@ class GraphView: UIView {
         // work out the distance to draw the remaining points at
         let interval = Int(graphWidth) / (data.count - 1);
         
+        let pointValue = point.objectForKey("value") as NSNumber
+        
         // Calculate X and Y positions
-        var yposition : CGFloat = ceil((CGFloat(point.objectForKey("value").integerValue as Int) * (axisHeight / everest))) - 10
+        var yposition : CGFloat = ceil((CGFloat(pointValue.integerValue as Int) * (axisHeight / everest))) - 10
         var xposition : CGFloat = CGFloat(interval * (data.indexOfObject(point))) + padding
         
         // If its the first point we want to nuge it in slightly
