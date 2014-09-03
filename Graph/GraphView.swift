@@ -58,10 +58,9 @@ class GraphView: UIView {
         axisWidth = rect.size.width - 10
         axisHeight = (rect.size.height - padding) - 10
         
-        // Lets work out the highest value, this will be 
-        // used to work out the position of each value
-        // on the Y axis, it essentialy reperesents 100%
-        // of Y
+        // Lets work out the highest value and round to the nearest 25. 
+        // This will be used to work out the position of each value
+        // on the Y axis, it essentialy reperesents 100% of Y
         for point in data {
             let n : Int = (point.objectForKey("value") as NSNumber).integerValue
             if CGFloat(n) > everest {
