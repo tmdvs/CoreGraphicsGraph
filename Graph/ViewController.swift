@@ -14,6 +14,11 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
+        let x: CGFloat = 10
+        let y: CGFloat = 50
+        let width = self.view.frame.width
+        let height = self.view.frame.height
+        
         let myData = [
             ["label" : "Mon",   "value" : NSNumber(int:15)],
             ["label" : "Tues",  "value" : NSNumber(int:30)],
@@ -24,9 +29,9 @@ class ViewController: UIViewController {
             ["label" : "Sun",   "value" : NSNumber(int:45)],
         ] as NSArray
         
-        let graph = GraphView(frame: CGRectMake(50, 50, 420, 200), data: myData)
-        self.view.addSubview(graph)
+        let graph = GraphView(frame: CGRectMake(x, y, width-x*2, height * 0.5), data: myData)
         
+        self.view.addSubview(graph)
     }
 
     override func didReceiveMemoryWarning() {
