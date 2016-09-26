@@ -26,13 +26,11 @@ There isn't really that many…
   - **showLines**   - whether or not to display lines from Y axis values
   - **showPoints**  - whether or not to display points on the line graph
   - **linesColor**  - The colour of Y axis lines if visible
-  - **axisColor**   - The colour of the X and Y axis
+  - **xAxisColor**   - The colour of the X axis
+  - **yAxisColor**   - The colour of the X axis
   - **graphColor**  - The colour of the actual line graph and points
   - **labelFont**   - Axis label font
   - **labelColor**  - The colour of the axis labels
-
-
-## To do
-  1. ~~Add x axis label support~~
-  2. ~~Build y axis labels from values~~
-  3. ~~Customisation options~~
+  - **originLabelText**  - Text placed origin point
+  - **originLabelText**  - The colour of originLabelText
+  - **xMargin**  - padding left of initial point and right of last point
