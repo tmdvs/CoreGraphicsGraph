@@ -12,6 +12,7 @@
 		223058BF1998E6AB001094C4 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 223058BE1998E6AB001094C4 /* Images.xcassets */; };
 		223058CB1998E6AB001094C4 /* GraphTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223058CA1998E6AB001094C4 /* GraphTests.swift */; };
 		223058D51998E6E0001094C4 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 223058D41998E6E0001094C4 /* GraphView.swift */; };
+		5242B86A1D989D3900B47A13 /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5242B8691D989D3900B47A13 /* Storyboard.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		223058CA1998E6AB001094C4 /* GraphTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphTests.swift; sourceTree = "<group>"; };
 		223058D41998E6E0001094C4 /* GraphView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		2280B921199AA20500FD3D20 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = SOURCE_ROOT; };
+		5242B8691D989D3900B47A13 /* Storyboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,6 +84,7 @@
 				223058D41998E6E0001094C4 /* GraphView.swift */,
 				223058BE1998E6AB001094C4 /* Images.xcassets */,
 				223058B51998E6AA001094C4 /* Supporting Files */,
+				5242B8691D989D3900B47A13 /* Storyboard.storyboard */,
 			);
 			path = Graph;
 			sourceTree = "<group>";
@@ -155,7 +158,8 @@
 		223058AA1998E6AA001094C4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
 				ORGANIZATIONNAME = "Tim Davies";
 				TargetAttributes = {
 					223058B11998E6AA001094C4 = {
@@ -192,6 +196,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				223058BF1998E6AB001094C4 /* Images.xcassets in Resources */,
+				5242B86A1D989D3900B47A13 /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -254,6 +259,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -321,6 +327,7 @@
 				INFOPLIST_FILE = Graph/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.v4technical.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -333,6 +340,7 @@
 				INFOPLIST_FILE = Graph/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.v4technical.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -351,6 +359,7 @@
 				);
 				INFOPLIST_FILE = GraphTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.v4technical.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Graph.app/Graph";
 			};
@@ -366,6 +375,7 @@
 				);
 				INFOPLIST_FILE = GraphTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.v4technical.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Graph.app/Graph";
 			};
