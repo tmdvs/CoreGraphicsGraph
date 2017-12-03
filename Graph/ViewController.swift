@@ -19,16 +19,17 @@ class ViewController: UIViewController {
         let height = self.view.frame.height
         
         let myData = [
-            ["label" : "Mon",   "value" : 15],
-            ["label" : "Tues",  "value" : 30],
-            ["label" : "Weds",  "value" : 7],
-            ["label" : "Thurs", "value" : 10],
-            ["label" : "Fri",   "value" : 30],
-            ["label" : "Sat",   "value" : 15],
-            ["label" : "Sun",   "value" : 45],
-        ]
+            ["Mon": 15],
+            ["Tues" : 30],
+            ["Weds" : 7],
+            ["Thurs" : 65],
+            ["Fri" : 30],
+            ["Sat" : 15],
+            ["Sun": 45]
+            ]
         
-        let graph = GraphView(frame: CGRect(x: x, y: y, width: width-x*2, height: height * 0.5), data: myData as NSArray)
+        
+        let graph = GraphView(frame: CGRect(x: x, y: y, width: width-x*2, height: height * 0.5), data: myData)
         
         self.view.addSubview(graph)
     }
