@@ -11,7 +11,7 @@ import QuartzCore
 
 class GraphView: UIView {
     
-    private var data = NSMutableArray()
+    private var data = [[String: Int]]()
     private var context : CGContext?
     
     private let padding     : CGFloat = 30
@@ -43,11 +43,11 @@ class GraphView: UIView {
         super.init(frame: frame)
     }
     
-    init(frame: CGRect, data: NSArray) {
+    init(frame: CGRect, data: [[String: Int]]) {
         
         super.init(frame: frame)
         backgroundColor = UIColor.clear
-        self.data = data.mutableCopy() as! NSMutableArray
+        self.data = data
         
     }
     
@@ -65,10 +65,11 @@ class GraphView: UIView {
         // Lets work out the highest value and round to the nearest 25.
         // This will be used to work out the position of each value
         // on the Y axis, it essentialy reperesents 100% of Y
-        for point in data {
-            let n : Int = ((point as AnyObject).object(forKey: "value") as! NSNumber).intValue
-            if CGFloat(n) > everest {
-                everest = CGFloat(Int(ceilf(Float(n) / 25) * 25))
+        for (index, point) in data.enumerated() {
+            let keys = Array(data[index].keys)
+            let currKey = keys.first!
+            if CGFloat(point[currKey]!) > everest {
+                everest = CGFloat(Int(ceilf(Float(point[currKey]!) / 25) * 25))
             }
         }
         if everest == 0 {
@@ -97,7 +98,7 @@ class GraphView: UIView {
         let yLabelInterval : Int = Int(everest / 5)
         for i in 0...5 {
             
-            let label = axisLabel(title: NSString(format: "%d", i * yLabelInterval))
+            let label = axisLabel(title: String(format: "%d", i * yLabelInterval))
             label.frame = CGRect(x: 0, y: floor((rect.size.height - padding) - CGFloat(i) * (axisHeight / 5) - 10), width: 20, height: 20)
             addSubview(label)
             
@@ -114,14 +115,14 @@ class GraphView: UIView {
         
         // Lets move to the first point
         let pointPath = CGMutablePath()
-        let firstPoint = (data[0] as! NSDictionary).object(forKey: "value") as! NSNumber
-        let initialY : CGFloat = ceil((CGFloat(firstPoint.intValue as Int) * (axisHeight / everest))) - 10
+        let firstPoint = data[0][data[0].keys.first!]
+        let initialY : CGFloat = ceil((CGFloat(firstPoint!) * (axisHeight / everest))) - 10
         let initialX : CGFloat = padding + xMargin
         pointPath.move(to: CGPoint(x: initialX, y: graphHeight - initialY))
         
         // Loop over the remaining values
-        for point in data {
-            plotPoint(point: point as! NSDictionary, path: pointPath)
+        for (_, value) in data.enumerated() {
+            plotPoint(point: [value.keys.first!: value.values.first!], path: pointPath)
         }
         
         // Set stroke colours and stroke the values path
@@ -143,21 +144,29 @@ class GraphView: UIView {
     
     
     // Plot a point on the graph
-    func plotPoint(point : NSDictionary, path: CGMutablePath) {
+    func plotPoint(point : [String: Int], path: CGMutablePath) {
         
         // work out the distance to draw the remaining points at
         let interval = Int(graphWidth - xMargin * 2) / (data.count - 1);
         
-        let pointValue = (point.object(forKey: "value") as! NSNumber).intValue
+        let pointValue = point[point.keys.first!]
         
         // Calculate X and Y positions
-        let yposition : CGFloat = ceil((CGFloat(pointValue) * (axisHeight / everest))) - 10
-        let xposition : CGFloat = CGFloat(interval * (data.index(of: point))) + padding + xMargin
+        let yposition : CGFloat = ceil((CGFloat(pointValue!) * (axisHeight / everest))) - 10
+    
+        var index = 0
+        for (ind, value) in data.enumerated() {
+            if point.keys.first! == value.keys.first! && point.values.first! == value.values.first! {
+                index = ind
+            }
+        }
+        let xposition = CGFloat(interval * index) + padding + xMargin
+        
         
         // Draw line to this value
         path.addLine(to: CGPoint(x: xposition, y: graphHeight - yposition))
         
-        let xLabel = axisLabel(title: point.object(forKey: "label") as! NSString)
+        let xLabel = axisLabel(title: point.keys.first!)
         xLabel.frame = CGRect(x: xposition - 17, y: graphHeight + 20, width: 36, height: 20)
         xLabel.textAlignment = .center
         addSubview(xLabel)
@@ -172,7 +181,7 @@ class GraphView: UIView {
     
     
     // Returns an axis label
-    func axisLabel(title: NSString) -> UILabel {
+    func axisLabel(title: String) -> UILabel {
         let label = UILabel(frame: CGRect.zero)
         label.text = title as String
         label.font = labelFont
