@@ -7,16 +7,16 @@ Draw a line graph with CGPath and Swift. This is really just the result of playi
 // GraphView.swift example usage
 
 let myData = [
-    ["label" : "Mon",   "value" : NSNumber(int:15)],
-    ["label" : "Tues",  "value" : NSNumber(int:30)],
-    ["label" : "Weds",  "value" : NSNumber(int:7)],
-    ["label" : "Thurs", "value" : NSNumber(int:60)],
-    ["label" : "Fri",   "value" : NSNumber(int:30)],
-    ["label" : "Sat",   "value" : NSNumber(int:15)],
-    ["label" : "Sun",   "value" : NSNumber(int:45)],
-] as NSArray
+    ["Mon" : 15],
+    ["Tues" : 30],
+    ["Weds" : 7],
+    ["Thurs" : 60],
+    ["Fri" : 30],
+    ["Sat" : 15],
+    ["Sun" : 45]
+]
 
-let graph = GraphView(frame: CGRectMake(50, 50, 420, 200), data: myData)
+let graph = GraphView(frame: CGRect(x: 50, y: 50, width: 420, height: 200), data: myData)
 self.view.addSubview(graph)
 ```
 
