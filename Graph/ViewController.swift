@@ -12,7 +12,6 @@ class ViewController: UIViewController {
                             
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
         let x: CGFloat = 10
         let y: CGFloat = 50
@@ -20,23 +19,23 @@ class ViewController: UIViewController {
         let height = self.view.frame.height
         
         let myData = [
-            ["label" : "Mon",   "value" : NSNumber(int:15)],
-            ["label" : "Tues",  "value" : NSNumber(int:30)],
-            ["label" : "Weds",  "value" : NSNumber(int:7)],
-            ["label" : "Thurs", "value" : NSNumber(int:60)],
-            ["label" : "Fri",   "value" : NSNumber(int:30)],
-            ["label" : "Sat",   "value" : NSNumber(int:15)],
-            ["label" : "Sun",   "value" : NSNumber(int:45)],
-        ] as NSArray
+            ["Mon": 15],
+            ["Tues" : 30],
+            ["Weds" : 7],
+            ["Thurs" : 65],
+            ["Fri" : 30],
+            ["Sat" : 15],
+            ["Sun": 45]
+            ]
         
-        let graph = GraphView(frame: CGRectMake(x, y, width-x*2, height * 0.5), data: myData)
+        
+        let graph = GraphView(frame: CGRect(x: x, y: y, width: width-x*2, height: height * 0.5), data: myData)
         
         self.view.addSubview(graph)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 
