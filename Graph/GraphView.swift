@@ -24,16 +24,16 @@ class GraphView: UIView {
     // Graph Styles
     var showLines   = true
     var showPoints  = true
-    var linesColor  = UIColor.init(red: 52/255, green: 52/255, blue: 52/255, alpha: 1)
+    var linesColor  = UIColor.lightGray
     var graphColor  = UIColor.black
-    var labelFont   = UIFont.systemFont(ofSize: 12)
+    var labelFont   = UIFont.systemFont(ofSize: 10)
     var labelColor  = UIColor.black
-    var xAxisColor  = UIColor.init(red: 52/255, green: 52/255, blue: 52/255, alpha: 1)
-    var yAxisColor  = UIColor.blue
+    var xAxisColor  = UIColor.black
+    var yAxisColor  = UIColor.black
     
     var xMargin         : CGFloat = 20
-    var originLabelText = ""
-    var originLabelColor = UIColor.white
+    var originLabelText : String?
+    var originLabelColor = UIColor.black
     
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -79,7 +79,7 @@ class GraphView: UIView {
         // Draw graph X-AXIS
         let xAxisPath = CGMutablePath()
         xAxisPath.move(to: CGPoint(x: padding, y: rect.size.height - 31))
-        xAxisPath.move(to: CGPoint(x: axisWidth, y: rect.size.height - 31))
+        xAxisPath.addLine(to: CGPoint(x: axisWidth, y: rect.size.height - 31))
         context!.addPath(xAxisPath)
         
         context!.setStrokeColor(xAxisColor.cgColor)
@@ -88,7 +88,7 @@ class GraphView: UIView {
         // Draw graph Y-AXIS
         let yAxisPath = CGMutablePath()
         yAxisPath.move(to: CGPoint(x: padding, y: 10))
-        yAxisPath.move(to: CGPoint(x: padding, y: rect.size.height - 31))
+        yAxisPath.addLine(to: CGPoint(x: padding, y: rect.size.height - 31))
         context!.addPath(yAxisPath)
         
         context!.setStrokeColor(yAxisColor.cgColor)
@@ -106,8 +106,9 @@ class GraphView: UIView {
             if(showLines && i != 0) {
                 let line = CGMutablePath()
                 line.move(to: CGPoint(x: padding + 1, y: floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5))))
-                line.move(to: CGPoint(x: axisWidth, y: floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5))))
+                line.addLine(to: CGPoint(x: axisWidth, y: floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5))))
                 context!.addPath(line)
+                context!.setLineWidth(1)
                 context!.setStrokeColor(linesColor.cgColor)
                 context!.strokePath()
             }
@@ -132,14 +133,16 @@ class GraphView: UIView {
         context!.strokePath()
         
         // Add Origin Label
-        let originLabel = UILabel()
-        originLabel.text = originLabelText
-        originLabel.textAlignment = .center
-        originLabel.font = labelFont
-        originLabel.textColor = originLabelColor
-        originLabel.backgroundColor = backgroundColor
-        originLabel.frame = CGRect(x: -2, y: graphHeight + 20, width: 40, height: 20)
-        addSubview(originLabel)
+        if(originLabelText != nil) {
+            let originLabel = UILabel()
+            originLabel.text = originLabelText
+            originLabel.textAlignment = .center
+            originLabel.font = labelFont
+            originLabel.textColor = originLabelColor
+            originLabel.backgroundColor = backgroundColor
+            originLabel.frame = CGRect(x: -2, y: graphHeight + 20, width: 40, height: 20)
+            addSubview(originLabel)
+        }
     }
     
     
@@ -167,7 +170,7 @@ class GraphView: UIView {
         path.addLine(to: CGPoint(x: xposition, y: graphHeight - yposition))
         
         let xLabel = axisLabel(title: point.keys.first!)
-        xLabel.frame = CGRect(x: xposition - 17, y: graphHeight + 20, width: 36, height: 20)
+        xLabel.frame = CGRect(x: xposition - 18, y: graphHeight + 20, width: 36, height: 20)
         xLabel.textAlignment = .center
         addSubview(xLabel)
         
