@@ -21,16 +21,29 @@ self.view.addSubview(graph)
 ```
 
 ## Graph customisation options
-There isn't really that many…
+There isn't really that many. The `GraphView` has a `style` property, the value of which is a `GraphStyle` struct which can be overriden.
 
-  - **showLines**   - whether or not to display lines from Y axis values
-  - **showPoints**  - whether or not to display points on the line graph
-  - **linesColor**  - The colour of Y axis lines if visible
-  - **xAxisColor**   - The colour of the X axis
-  - **yAxisColor**   - The colour of the X axis
-  - **graphColor**  - The colour of the actual line graph and points
-  - **labelFont**   - Axis label font
-  - **labelColor**  - The colour of the axis labels
-  - **originLabelText**  - Text placed origin point
-  - **originLabelText**  - The colour of originLabelText
-  - **xMargin**  - padding left of initial point and right of last point
+```swift
+struct GraphStyle {
+ 
+    struct labels {
+        var font = UIFont.systemFont(ofSize: 10)
+        var color = UIColor.black
+    }
+    
+    struct colors {
+        var xAxis = UIColor.black
+        var yAxis = UIColor.black
+        var lines = UIColor.lightGray
+        var graph = UIColor.black
+    }
+    
+    var colors = colors()
+    var labels = labels()
+    
+    var showLines = true
+    var showPoints = true
+    
+    var xMargin : CGFloat = 20
+}
+```
