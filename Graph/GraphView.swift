@@ -9,7 +9,33 @@
 import UIKit
 import QuartzCore
 
+struct GraphStyle {
+    
+    struct labels {
+        var font = UIFont.systemFont(ofSize: 10)
+        var color = UIColor.black
+    }
+    
+    struct colors {
+        var xAxis = UIColor.black
+        var yAxis = UIColor.black
+        var lines = UIColor.lightGray
+        var graph = UIColor.black
+    }
+    
+    var colors = colors()
+    var labels = labels()
+    
+    var showLines = true
+    var showPoints = true
+    
+    var xMargin : CGFloat = 20
+}
+
 class GraphView: UIView {
+    
+    var style = GraphStyle()
+    var originLabelText: String?
     
     private var data = [[String: Int]]()
     private var context : CGContext?
@@ -21,19 +47,6 @@ class GraphView: UIView {
     private var axisHeight  : CGFloat = 0
     private var everest     : CGFloat = 0
     
-    // Graph Styles
-    var showLines   = true
-    var showPoints  = true
-    var linesColor  = UIColor.lightGray
-    var graphColor  = UIColor.black
-    var labelFont   = UIFont.systemFont(ofSize: 10)
-    var labelColor  = UIColor.black
-    var xAxisColor  = UIColor.black
-    var yAxisColor  = UIColor.black
-    
-    var xMargin         : CGFloat = 20
-    var originLabelText : String?
-    var originLabelColor = UIColor.black
     
     required init(coder: NSCoder) {
         fatalError("NSCoding not supported")
@@ -44,11 +57,9 @@ class GraphView: UIView {
     }
     
     init(frame: CGRect, data: [[String: Int]]) {
-        
         super.init(frame: frame)
         backgroundColor = UIColor.clear
         self.data = data
-        
     }
     
     override func draw(_ rect: CGRect) {
@@ -82,7 +93,7 @@ class GraphView: UIView {
         xAxisPath.addLine(to: CGPoint(x: axisWidth, y: rect.size.height - 31))
         context!.addPath(xAxisPath)
         
-        context!.setStrokeColor(xAxisColor.cgColor)
+        context!.setStrokeColor(style.colors.xAxis.cgColor)
         context!.strokePath()
         
         // Draw graph Y-AXIS
@@ -91,7 +102,7 @@ class GraphView: UIView {
         yAxisPath.addLine(to: CGPoint(x: padding, y: rect.size.height - 31))
         context!.addPath(yAxisPath)
         
-        context!.setStrokeColor(yAxisColor.cgColor)
+        context!.setStrokeColor(style.colors.yAxis.cgColor)
         context!.strokePath()
         
         // Draw y axis labels and lines
@@ -103,13 +114,13 @@ class GraphView: UIView {
             addSubview(label)
             
             
-            if(showLines && i != 0) {
+            if(style.showLines && i != 0) {
                 let line = CGMutablePath()
                 line.move(to: CGPoint(x: padding + 1, y: floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5))))
                 line.addLine(to: CGPoint(x: axisWidth, y: floor(rect.size.height - padding) - (CGFloat(i) * (axisHeight / 5))))
                 context!.addPath(line)
                 context!.setLineWidth(1)
-                context!.setStrokeColor(linesColor.cgColor)
+                context!.setStrokeColor(style.colors.lines.cgColor)
                 context!.strokePath()
             }
         }
@@ -118,7 +129,7 @@ class GraphView: UIView {
         let pointPath = CGMutablePath()
         let firstPoint = data[0][data[0].keys.first!]
         let initialY : CGFloat = ceil((CGFloat(firstPoint!) * (axisHeight / everest))) - 10
-        let initialX : CGFloat = padding + xMargin
+        let initialX : CGFloat = padding + style.xMargin
         pointPath.move(to: CGPoint(x: initialX, y: graphHeight - initialY))
         
         // Loop over the remaining values
@@ -129,7 +140,7 @@ class GraphView: UIView {
         // Set stroke colours and stroke the values path
         context!.addPath(pointPath)
         context!.setLineWidth(2)
-        context!.setStrokeColor(graphColor.cgColor)
+        context!.setStrokeColor(style.colors.graph.cgColor)
         context!.strokePath()
         
         // Add Origin Label
@@ -137,8 +148,8 @@ class GraphView: UIView {
             let originLabel = UILabel()
             originLabel.text = originLabelText
             originLabel.textAlignment = .center
-            originLabel.font = labelFont
-            originLabel.textColor = originLabelColor
+            originLabel.font = style.labels.font
+            originLabel.textColor = style.labels.color
             originLabel.backgroundColor = backgroundColor
             originLabel.frame = CGRect(x: -2, y: graphHeight + 20, width: 40, height: 20)
             addSubview(originLabel)
@@ -148,9 +159,8 @@ class GraphView: UIView {
     
     // Plot a point on the graph
     func plotPoint(point : [String: Int], path: CGMutablePath) {
-        
         // work out the distance to draw the remaining points at
-        let interval = Int(graphWidth - xMargin * 2) / (data.count - 1);
+        let interval = Int(graphWidth - style.xMargin * 2) / (data.count - 1);
         
         let pointValue = point[point.keys.first!]
         
@@ -163,7 +173,7 @@ class GraphView: UIView {
                 index = ind
             }
         }
-        let xposition = CGFloat(interval * index) + padding + xMargin
+        let xposition = CGFloat(interval * index) + padding + style.xMargin
         
         
         // Draw line to this value
@@ -174,7 +184,7 @@ class GraphView: UIView {
         xLabel.textAlignment = .center
         addSubview(xLabel)
         
-        if(showPoints) {
+        if(style.showPoints) {
             // Add a marker for this value
             let pointMarker = valueMarker()
             pointMarker.frame = CGRect(x: xposition - 8, y: CGFloat(ceil(graphHeight - yposition) - 8), width: 16, height: 16)
@@ -182,13 +192,12 @@ class GraphView: UIView {
         }
     }
     
-    
     // Returns an axis label
     func axisLabel(title: String) -> UILabel {
         let label = UILabel(frame: CGRect.zero)
         label.text = title as String
-        label.font = labelFont
-        label.textColor = labelColor
+        label.font = style.labels.font
+        label.textColor = style.labels.color
         label.backgroundColor = backgroundColor
         label.textAlignment = NSTextAlignment.right
         
@@ -207,7 +216,7 @@ class GraphView: UIView {
         markerInner.frame = CGRect(x: 3, y: 3, width: 10, height: 10)
         markerInner.cornerRadius = 5
         markerInner.masksToBounds = true
-        markerInner.backgroundColor = graphColor.cgColor
+        markerInner.backgroundColor = style.colors.graph.cgColor
         
         pointMarker.addSublayer(markerInner)
         
